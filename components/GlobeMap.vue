@@ -37,7 +37,7 @@ function initGlobe() {
   
   globe = Globe()(globeContainer.value)
   globe
-    .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+    .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
     .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
     .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
     .pointOfView({ lat: 20, lng: 0, altitude: 2.5 })
@@ -45,10 +45,10 @@ function initGlobe() {
     .pointLabel('label')
     .pointLat('lat')
     .pointLng('lng')
-    .pointColor(() => '#00ffff')
+    .pointColor(() => '#ff0033')
     .pointAltitude(0.1)
     .pointRadius(0.5)
-    .atmosphereColor('#1d4ed8')
+    .atmosphereColor('#ff0033')
     .atmosphereAltitude(0.25)
     .width(globeContainer.value.clientWidth)
     .height(globeContainer.value.clientHeight)
