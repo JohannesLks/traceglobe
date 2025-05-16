@@ -1,4 +1,4 @@
-export default {
+export default defineNuxtConfig({
   ssr: false, // Wichtig für Vercel: SPA mit Client-Side Routing
   runtimeConfig: {
     public: {
@@ -7,4 +7,4 @@ export default {
   },
   modules: ['@vueuse/nuxt'],
   devtools: false
-}
+})
