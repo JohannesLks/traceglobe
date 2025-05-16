@@ -5,6 +5,7 @@
     </button>
 
     <div v-if="loading">⏳ Lade Anbieterinformationen...</div>
+
     <div v-else-if="providers.length">
       <h2 class="text-xl font-semibold">📦 Gefundene Anbieter:</h2>
       <ul class="list-disc pl-6">
@@ -25,6 +26,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import GlobeMap from '~/components/GlobeMap.vue'
+
 const config = useRuntimeConfig()
 
 const providers = ref([])
@@ -32,19 +34,16 @@ const geoData = ref([])
 const loading = ref(false)
 
 function loginWithGoogle() {
-  const width = 500, height = 600
+  const width = 500
+  const height = 600
   const left = (window.innerWidth - width) / 2
   const top = (window.innerHeight - height) / 2
-  const popup = window.open(`${config.public.backendUrl}/auth/login`, "_blank",
-    `popup,width=${width},height=${height},left=${left},top=${top}`)
-
-  window.addEventListener("message", (event) => {
-    if (event.data === "google-auth-success") {
-      fetchData()
-    }
-  })
+  window.open(
+    `${config.public.backendUrl}/auth/login`,
+    "_blank",
+    `popup,width=${width},height=${height},left=${left},top=${top}`
+  )
 }
-
 
 function handleAuthMessage(event) {
   if (event.data === "google-auth-success") {
@@ -65,7 +64,7 @@ async function fetchData() {
   loading.value = true
   try {
     const res = await fetch(`${config.public.backendUrl}/gmail/providers`, {
-      credentials: "include"
+      credentials: "include" // wichtig: Session muss gesendet werden
     })
     const data = await res.json()
     providers.value = data.providers || []
