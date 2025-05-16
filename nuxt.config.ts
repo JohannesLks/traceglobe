@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  ssr: false, // wichtig für Vercel mit clientseitigem Routing (SPA)
+  ssr: false, // important for Vercel with client-side routing (SPA)
   runtimeConfig: {
     public: {
       backendUrl: process.env.BACKEND_URL || 'https://traceglobebackend.onrender.com'
