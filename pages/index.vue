@@ -13,7 +13,9 @@
     <div v-else-if="providers.length">
       <h2 class="text-xl font-semibold">📦 Gefundene Anbieter:</h2>
       <ul class="list-disc pl-6">
-        <li v-for="provider in providers" :key="provider">{{ provider }}</li>
+        <li v-for="provider in providers" :key="provider">
+          {{ provider.label }} ({{ provider.country }} – {{ provider.asn }})
+        </li>
       </ul>
 
       <button @click="downloadJSON" class="mt-4 px-4 py-2 bg-green-600 text-white rounded">
@@ -52,8 +54,7 @@ function loginWithGoogle() {
   const checkClosed = setInterval(() => {
     if (popup?.closed) {
       clearInterval(checkClosed)
-      // Sicherheitsfallback falls postMessage nicht ankam
-      fetchData()
+      fetchData() // Sicherheitsfallback
     }
   }, 500)
 }
@@ -76,7 +77,6 @@ onUnmounted(() => {
 async function fetchData() {
   loading.value = true
   errorMessage.value = ""
-
   try {
     const res = await fetch(`${config.public.backendUrl}/gmail/providers`, {
       credentials: "include"
@@ -91,13 +91,12 @@ async function fetchData() {
     const data = await res.json()
     console.log("📦 Serverantwort:", data)
 
-    providers.value = data.providers || []
+    providers.value = data.geodata || []
     geoData.value = data.geodata || []
 
-    if (!providers.value.length) {
+    if (!geoData.value.length) {
       errorMessage.value = "Keine Anbieter gefunden – Posteingang möglicherweise leer oder Analyse nicht abgeschlossen."
     }
-
   } catch (err) {
     console.error("❌ Fehler beim Laden:", err)
     errorMessage.value = "Fehler beim Laden der Anbieterinformationen."
