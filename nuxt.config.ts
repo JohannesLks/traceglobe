@@ -25,5 +25,11 @@ export default defineNuxtConfig({
         }
       ]
     }
+  },
+  vite: {
+    server: {
+      hmr: { overlay: false },
+      watch: { usePolling: true }
+    }
   }
 })
