@@ -1,18 +1,18 @@
 import requests
-from dotenv import load_dotenv
-
-load_dotenv()  # lädt .env-Datei aus dem Projektverzeichnis
-
-API_KEY = os.getenv("CLEARBIT_API_KEY")
+import re
 
 def org_to_domain(company_name):
-    print(f"🌐 Suche Domain für: {company_name}")
+    print(f"🌐 Suche Domain für Firma via DuckDuckGo: {company_name}")
     try:
-        url = f"https://company.clearbit.com/v2/companies/find?name={company_name}"
-        headers = {"Authorization": f"Bearer {CLEARBIT_KEY}"}
-        res = requests.get(url, headers=headers)
-        if res.status_code == 200:
-            return res.json().get("domain")
-    except:
-        pass
+        q = f"{company_name} official website"
+        headers = {"User-Agent": "Mozilla/5.0"}
+        url = f"https://html.duckduckgo.com/html?q={q}"
+        res = requests.get(url, headers=headers, timeout=10)
+        matches = re.findall(r'https?://([a-zA-Z0-9.-]+\.[a-z]{2,})', res.text)
+        domains = [d for d in matches if not d.startswith("duckduckgo")]
+        if domains:
+            print(f"✅ Beste Domain gefunden: {domains[0]}")
+            return domains[0]
+    except Exception as e:
+        print(f"❌ DuckDuckGo-Fehler: {e}")
     return None
