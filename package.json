@@ -1,0 +1,23 @@
+{
+  "name": "globe-tracker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@vueuse/nuxt": "^10.7.0",
+    "globe.gl": "^2.32.1",
+    "nuxt": "^3.9.0",
+    "vue": "^3.3.13"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0"
+  }
+}
