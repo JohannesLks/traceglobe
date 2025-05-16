@@ -7,5 +7,11 @@ export default defineNuxtConfig({
   },
   modules: ['@vueuse/nuxt'],
   devtools: false,
-  css: ['@/assets/css/main.css']
+  css: ['@/assets/css/main.css'],
+  app: {
+    head: {
+      title: 'TraceGlobe',
+      meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }]
+    }
+  }
 })

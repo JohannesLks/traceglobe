@@ -10,25 +10,15 @@ body {
   background-color: #000;
   color: #fff;
   font-family: 'Inter var', sans-serif;
-  margin: 0;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.glass-panel {
-  @apply backdrop-blur-xl bg-white/[0.02] border border-white/[0.05];
 }
 
 .text-gradient {
   @apply bg-gradient-to-r from-white via-red-300 to-red-500 bg-clip-text text-transparent;
 }
 
-.hover-glow {
-  @apply transition-all duration-500;
-}
-
-.hover-glow:hover {
-  @apply shadow-[0_0_30px_rgba(255,45,85,0.2)];
+.glass-panel {
+  @apply bg-white/[0.03] backdrop-blur-lg border border-white/[0.05];
 }
 
 @keyframes float {
