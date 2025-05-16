@@ -12,6 +12,7 @@
     "@vueuse/nuxt": "^10.7.0",
     "globe.gl": "^2.32.1",
     "nuxt": "3.8.2",
+    "rollup": "^3.29.4",
     "vue": "^3.3.13"
   },
   "devDependencies": {
