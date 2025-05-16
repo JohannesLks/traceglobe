@@ -37,7 +37,14 @@ function loginWithGoogle() {
   const top = (window.innerHeight - height) / 2
   const popup = window.open(`${config.public.backendUrl}/auth/login`, "_blank",
     `popup,width=${width},height=${height},left=${left},top=${top}`)
+
+  window.addEventListener("message", (event) => {
+    if (event.data === "google-auth-success") {
+      fetchData()
+    }
+  })
 }
+
 
 function handleAuthMessage(event) {
   if (event.data === "google-auth-success") {
