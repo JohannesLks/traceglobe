@@ -16,7 +16,9 @@
       </button>
     </div>
 
-    <GlobeMap v-if="geoData.length" :points="geoData" />
+    <client-only fallback-tag="div" fallback="🗺️ Lade Globus...">
+      <GlobeMap v-if="geoData.length" :points="geoData" />
+    </client-only>
   </div>
 </template>
 
