@@ -1,7 +1,7 @@
 <template>
   <div id="globeViz" 
        ref="globeContainer" 
-       class="w-full h-[600px] md:h-[800px] rounded-xl overflow-hidden border border-red-500/20 shadow-xl shadow-red-500/10 transition-all duration-300 hover:border-red-500/30" />
+       class="w-full h-[600px] md:h-[800px] rounded-2xl overflow-hidden glass-panel hover-glow" />
 </template>
 
 <script setup>
@@ -37,8 +37,9 @@ function animateGlobe() {
   if (!globe) return
   
   gsap.to({}, {
-    duration: 180,
+    duration: 240,
     repeat: -1,
+    ease: "none",
     onUpdate: () => {
       const rotation = globe.rotation()
       globe.rotation({ ...rotation, lng: rotation.lng + 0.1 })
@@ -54,18 +55,17 @@ function initGlobe() {
     .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
     .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
     .atmosphereColor('#ff2d55')
-    .atmosphereAltitude(0.3)
+    .atmosphereAltitude(0.25)
     .pointColor(() => '#ff2d55')
-    .pointRadius(0.5)
-    .pointAltitude(0.06)
+    .pointRadius(0.6)
+    .pointAltitude(0.08)
     .pointLabel('label')
     .pointLat('lat')
     .pointLng('lng')
-    .pointOfView({ lat: 20, lng: 0, altitude: 2.2 })
+    .pointOfView({ lat: 30, lng: 0, altitude: 2.5 })
     .width(globeContainer.value.clientWidth)
     .height(globeContainer.value.clientHeight)
 
-  // Add glow effect
   globe.pointsMerge(true)
     .pointsTransitionDuration(1000)
 }
