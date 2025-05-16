@@ -1,18 +1,16 @@
-module.exports = {
-  content: [
-    "./components/**/*.{js,vue,ts}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
-    "./app.vue",
-  ],
-  theme: {
-    extend: {
-      animation: {
-        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'spin': 'spin 1s linear infinite',
-      },
+theme: {
+  extend: {
+    colors: {
+      background: '#000000',
+      primary: '#ff0033',
+      muted: '#1a1a1a',
+      text: '#e5e5e5',
+    },
+    fontFamily: {
+      sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+    },
+    dropShadow: {
+      red: '0 0 10px #ff0033',
     },
   },
-  plugins: [],
 }
