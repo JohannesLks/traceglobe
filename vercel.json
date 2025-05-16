@@ -1,5 +1,4 @@
 {
-  "buildCommand": "nuxt build",
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
   ]
