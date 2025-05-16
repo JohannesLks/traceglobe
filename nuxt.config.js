@@ -1,8 +1,5 @@
-// nuxt.config.ts
-import { defineNuxtConfig } from 'nuxt'
-
-export default defineNuxtConfig({
-  ssr: false,
+export default {
+  ssr: false, // Wichtig für Vercel: SPA mit Client-Side Routing
   runtimeConfig: {
     public: {
       backendUrl: process.env.BACKEND_URL || 'https://traceglobebackend.onrender.com'
@@ -10,4 +7,4 @@ export default defineNuxtConfig({
   },
   modules: ['@vueuse/nuxt'],
   devtools: false
-})
+}
