@@ -37,6 +37,9 @@ function initGlobe() {
   
   globe = Globe()(globeContainer.value)
   globe
+    .globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg')  // 🌍 Textur mit Kontinenten
+    .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png') // Optional: Relief
+    .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png') // Optional: Hintergrund
     .pointOfView({ lat: 20, lng: 0, altitude: 2 })
     .pointsData(props.points || [])
     .pointLabel('label')
@@ -47,7 +50,7 @@ function initGlobe() {
     .width(globeContainer.value.clientWidth)
     .height(globeContainer.value.clientHeight)
 }
-
+  
 watch(() => props.points, (newPoints) => {
   if (globe) {
     globe.pointsData(newPoints || [])
