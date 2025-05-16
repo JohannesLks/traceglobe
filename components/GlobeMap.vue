@@ -1,28 +1,24 @@
 <template>
-  <div id="globeViz" ref="globeContainer" class="h-[600px] md:h-[800px] w-full"></div>
+  <div id="globeViz" ref="globeContainer" class="w-full h-[600px] md:h-[800px] rounded-xl overflow-hidden border border-red-500/20 shadow-xl shadow-red-500/10" />
 </template>
 
 <script setup>
 import { onMounted, onUnmounted, watch, ref } from 'vue'
 import Globe from 'globe.gl'
 
-const props = defineProps({
-  points: Array
-})
+const props = defineProps({ points: Array })
 
 const globeContainer = ref(null)
 let globe = null
 
 onMounted(() => {
-  initGlobe()
+  setTimeout(() => initGlobe(), 50)
   window.addEventListener('resize', handleResize)
 })
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
-  if (globe) {
-    globe._destructor()
-  }
+  globe?._destructor()
 })
 
 function handleResize() {
@@ -34,29 +30,25 @@ function handleResize() {
 
 function initGlobe() {
   if (!globeContainer.value) return
-  
+
   globe = Globe()(globeContainer.value)
-  globe
-    .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
-    .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+    .globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg')
     .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
-    .pointOfView({ lat: 20, lng: 0, altitude: 2.5 })
-    .pointsData(props.points || [])
+    .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+    .atmosphereColor('#ff2d55')
+    .atmosphereAltitude(0.3)
+    .pointColor(() => '#ff2d55')
+    .pointRadius(0.5)
+    .pointAltitude(0.06)
     .pointLabel('label')
     .pointLat('lat')
     .pointLng('lng')
-    .pointColor(() => '#ff0033')
-    .pointAltitude(0.1)
-    .pointRadius(0.5)
-    .atmosphereColor('#ff0033')
-    .atmosphereAltitude(0.25)
+    .pointOfView({ lat: 20, lng: 0, altitude: 2.2 })
     .width(globeContainer.value.clientWidth)
     .height(globeContainer.value.clientHeight)
 }
-  
+
 watch(() => props.points, (newPoints) => {
-  if (globe) {
-    globe.pointsData(newPoints || [])
-  }
+  if (globe) globe.pointsData(newPoints || [])
 }, { deep: true })
 </script>

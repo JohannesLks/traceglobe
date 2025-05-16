@@ -6,5 +6,6 @@ export default defineNuxtConfig({
     }
   },
   modules: ['@vueuse/nuxt'],
-  devtools: false
+  devtools: false,
+  css: ['@/assets/css/main.css']
 })
