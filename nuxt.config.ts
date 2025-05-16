@@ -4,5 +4,6 @@ export default defineNuxtConfig({
       backendUrl: process.env.BACKEND_URL || 'https://traceglobebackend.onrender.com'
     }
   },
-  modules: ['@vueuse/nuxt']
+  modules: ['@vueuse/nuxt'],
+  devtools: false
 })
