@@ -23,25 +23,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, onMounted, onUnmounted } from 'vue'
 import GlobeMap from '~/components/GlobeMap.vue'
-
 const config = useRuntimeConfig()
+
 const providers = ref([])
 const geoData = ref([])
 const loading = ref(false)
-const route = useRoute()
-const router = useRouter()
-
-onMounted(() => {
-  // Prüft, ob von Google zurückgeleitet wurde
-  if (route.query.code && route.query.state) {
-    console.log("🔁 Google OAuth Callback erkannt")
-    fetchData()
-    router.replace("/") // Bereinigt URL nach Callback
-  }
-})
 
 function loginWithGoogle() {
   const width = 500, height = 600
@@ -49,13 +37,22 @@ function loginWithGoogle() {
   const top = (window.innerHeight - height) / 2
   const popup = window.open(`${config.public.backendUrl}/auth/login`, "_blank",
     `popup,width=${width},height=${height},left=${left},top=${top}`)
-  const checkClosed = setInterval(() => {
-    if (popup?.closed) {
-      clearInterval(checkClosed)
-      fetchData()
-    }
-  }, 500)
 }
+
+function handleAuthMessage(event) {
+  if (event.data === "google-auth-success") {
+    console.log("✅ Authentifizierung erfolgreich – lade Daten...")
+    fetchData()
+  }
+}
+
+onMounted(() => {
+  window.addEventListener("message", handleAuthMessage)
+})
+
+onUnmounted(() => {
+  window.removeEventListener("message", handleAuthMessage)
+})
 
 async function fetchData() {
   loading.value = true
