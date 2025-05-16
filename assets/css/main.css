@@ -9,40 +9,25 @@
 body {
   background-color: #000;
   color: #fff;
-  font-family: 'Inter var', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   overflow-x: hidden;
 }
 
-/* 🧊 Glass effect */
-.glass-panel {
-  @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.05];
+@layer components {
+  .glass-panel {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/[0.05];
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-white via-red-300 to-red-500 bg-clip-text text-transparent;
+  }
 }
 
-/* 🎨 Gradient text */
-.text-gradient {
-  @apply bg-gradient-to-r from-white via-red-300 to-red-500 bg-clip-text text-transparent;
-}
-
-/* ✨ Floating background animation */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* 🖥 Typing cursor */
 .typed-cursor {
   font-family: 'JetBrains Mono', monospace;
   font-size: 1.2rem;
   animation: blink 1s infinite;
   margin-left: 0.2em;
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
 }
