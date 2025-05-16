@@ -1,5 +1,0 @@
-folium
-ipwhois
-requests
-beautifulsoup4
-spacy
