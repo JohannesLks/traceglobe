@@ -6,6 +6,9 @@ export default defineNuxtConfig({
   },
   modules: ['@vueuse/nuxt'],
   devtools: {
-    enabled: false
+    enabled: false,
+    timing: false,
+    vscode: false,
+    telemetry: false
   }
 })
