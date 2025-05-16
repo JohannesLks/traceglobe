@@ -5,5 +5,7 @@ export default defineNuxtConfig({
     }
   },
   modules: ['@vueuse/nuxt'],
-  devtools: false
+  devtools: {
+    enabled: false
+  }
 })
